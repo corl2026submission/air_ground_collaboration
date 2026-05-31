@@ -95,19 +95,39 @@
       text-align: center;
     }
 
-    /* ── Publication video embed ────────────────────────────────── */
+    /* ── Publication video (thumbnail + link fallback) ─────────── */
     .publication-video {
       position: relative;
       width: 100%;
-      height: 0;
-      padding-bottom: 56.25%;
+      border-radius: 10px;
       overflow: hidden;
-      border-radius: 10px !important;
+      display: block;
+      cursor: pointer;
     }
-    .publication-video iframe {
+    .publication-video img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+    .publication-video .play-btn {
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 72px; height: 72px;
+      background: rgba(255,0,0,0.88);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      pointer-events: none;
+    }
+    .publication-video:hover .play-btn {
+      background: rgba(200,0,0,1);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+    .publication-video .play-btn svg {
+      width: 28px; height: 28px;
+      fill: white;
+      margin-left: 5px;
     }
 
     /* ── Method / figure images ─────────────────────────────────── */
@@ -339,17 +359,19 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Video</h2>
 
-        <!-- Option A: YouTube embed — replace VIDEO_ID -->
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/UKRjjblC8iI?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-
-        <!-- Option B: local MP4 — uncomment and delete the iframe block above
-        <video controls width="100%" style="border-radius:10px;">
-          <source src="videos/presentation.mp4" type="video/mp4" />
-        </video>
-        -->
+        <!-- Clickable thumbnail — opens YouTube in new tab -->
+        <a class="publication-video"
+           href="https://youtu.be/UKRjjblC8iI"
+           target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/UKRjjblC8iI/maxresdefault.jpg"
+               alt="Demo video thumbnail" />
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </a>
+        <p class="has-text-centered" style="margin-top:0.75rem; font-size:0.85rem; color:#888;">
+          Click to watch on YouTube
+        </p>
       </div>
     </div>
 
