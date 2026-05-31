@@ -99,13 +99,17 @@
     .publication-video {
       position: relative;
       width: 100%;
+      aspect-ratio: 16/9;
       border-radius: 10px;
       overflow: hidden;
       display: block;
       cursor: pointer;
+      background: #000;
     }
     .publication-video img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
       border-radius: 10px;
     }
@@ -364,6 +368,7 @@
            href="https://youtu.be/UKRjjblC8iI"
            target="_blank" rel="noopener">
           <img src="https://img.youtube.com/vi/UKRjjblC8iI/hqdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/UKRjjblC8iI/default.jpg'"
                alt="Demo video thumbnail" />
           <div class="play-btn">
             <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
@@ -385,6 +390,7 @@
            href="https://youtu.be/Tx4gb7NJhqM"
            target="_blank" rel="noopener">
           <img src="https://img.youtube.com/vi/Tx4gb7NJhqM/hqdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/Tx4gb7NJhqM/default.jpg'"
                alt="Demo video 2 thumbnail" />
           <div class="play-btn">
             <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
