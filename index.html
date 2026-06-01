@@ -1,72 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Learning Collaborative Navigation Policies for an Air-Ground Team Under Sensing Uncertainty in Unknown Environments — CoRL 2025</title>
+  <title>Learning Collaborative Navigation Policies for an Air-Ground Team</title>
+  <meta name="description" content="Learning Collaborative Navigation Policies for an Air-Ground Team Under Sensing Uncertainty in Unknown Environments" />
 
-  <!-- ── Fonts ───────────────────────────────────────────────────── -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro&display=swap" rel="stylesheet" />
 
-  <!-- ── Bulma CSS framework ────────────────────────────────────── -->
+  <!-- Bulma + carousel -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-
-  <!-- ── Bulma carousel ─────────────────────────────────────────── -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/css/bulma-carousel.min.css" />
 
-  <!-- ── FontAwesome + Academicons ──────────────────────────────── -->
+  <!-- FontAwesome + Academicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
 
-  <!-- ── Custom styles (mirrors hovsg/nerfies conventions) ──────── -->
+  <!-- Inline CSS (mirrors hovsg/nerfies index.css) -->
   <style>
-    body {
-      font-family: 'Noto Sans', sans-serif;
-    }
+    body { font-family: 'Noto Sans', sans-serif; }
 
-    /* ── Navbar ─────────────────────────────────────────────────── */
-    .navbar-item img { max-height: 2rem; }
+    .footer .icon-link { font-size: 25px; color: #000; }
+    .link-block a { margin-top: 5px; margin-bottom: 5px; }
 
-    /* ── Hero / title ───────────────────────────────────────────── */
-    .publication-title {
-      font-family: 'Google Sans', sans-serif;
-    }
-    .publication-authors {
-      font-family: 'Google Sans', sans-serif;
-    }
-    .publication-authors a {
-      color: hsl(204, 86%, 53%) !important;
-    }
+    .teaser .hero-body { padding-top: 0; padding-bottom: 3rem; }
+    .teaser { font-family: 'Google Sans', sans-serif; }
+
+    .publication-title  { font-family: 'Google Sans', sans-serif; }
+    .publication-authors { font-family: 'Google Sans', sans-serif; }
+    .publication-authors a { color: hsl(204, 86%, 53%) !important; }
     .publication-authors a:hover { text-decoration: underline; }
     .author-block { display: inline-block; }
-    .publication-venue {
-      color: #555;
-      width: fit-content;
-      font-weight: bold;
-    }
-    .publication-awards {
-      color: #ff3860;
-      width: fit-content;
-      font-weight: bolder;
-    }
-    .link-block a {
-      margin-top: 5px;
-      margin-bottom: 5px;
-    }
 
-    /* ── Teaser ─────────────────────────────────────────────────── */
-    .teaser {
-      font-family: 'Google Sans', sans-serif;
-    }
-    .teaser .hero-body {
-      padding-top: 0;
-      padding-bottom: 3rem;
-    }
+    .publication-venue  { color: #555; width: fit-content; font-weight: bold; }
+    .publication-awards { color: #ff3860; width: fit-content; font-weight: bolder; }
 
-    /* ── Results carousel ───────────────────────────────────────── */
-    .results-carousel {
+    /* YouTube thumbnail player */
+    .yt-thumb {
+      position: relative;
+      display: block;
+      width: 100%;
+      border-radius: 10px;
       overflow: hidden;
+      cursor: pointer;
+      background: #000;
+      aspect-ratio: 16/9;
     }
+    .yt-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .yt-thumb .play-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 68px; height: 68px;
+      background: rgba(255,0,0,0.88);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      pointer-events: none;
+    }
+    .yt-thumb:hover .play-btn {
+      background: rgba(200,0,0,1);
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+    .yt-thumb .play-btn svg { width: 26px; height: 26px; fill: white; margin-left: 4px; }
+
+    .results-carousel { overflow: hidden; }
     .results-carousel .item {
       margin: 5px;
       overflow: hidden;
@@ -75,149 +78,41 @@
       padding: 0;
       position: relative;
     }
-    .results-carousel video {
-      margin: 0;
-      display: block;
-      width: 100%;
-    }
-    .overlay-container {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.55);
-      color: white;
-      font-size: 15px;
-      font-family: Arial, sans-serif;
-      padding: 5px 12px;
-      border-radius: 5px;
-      width: calc(100% - 20px);
-      text-align: center;
-    }
+    .results-carousel video { margin: 0; display: block; width: 100%; }
 
-    /* ── Publication video (thumbnail + link fallback) ─────────── */
-    .publication-video {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16/9;
-      border-radius: 10px;
-      overflow: hidden;
-      display: block;
-      cursor: pointer;
-      background: #000;
-    }
-    .publication-video img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      border-radius: 10px;
-    }
-    .publication-video .play-btn {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 72px; height: 72px;
-      background: rgba(255,0,0,0.88);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, transform 0.2s;
-      pointer-events: none;
-    }
-    .publication-video:hover .play-btn {
-      background: rgba(200,0,0,1);
-      transform: translate(-50%, -50%) scale(1.08);
-    }
-    .publication-video .play-btn svg {
-      width: 28px; height: 28px;
-      fill: white;
-      margin-left: 5px;
-    }
+    .image-center-block { margin: 20px; text-align: center; }
 
-    /* ── Method / figure images ─────────────────────────────────── */
-    .publication-body img { border-radius: 6px; }
-    .image-center-block {
-      margin: 20px;
-      text-align: center;
-    }
-
-
-    /* ── BibTeX block (commented out for anonymous submission) ─────
-    #BibTeX pre {
-      background: #f5f5f5;
-      border-radius: 6px;
-      padding: 1.5rem;
-      font-size: 0.85rem;
-      overflow-x: auto;
-    }
-    ────────────────────────────────────────────────────────────────── */
-
-    /* ── People / profile cards ─────────────────────────────────── */
+    /* Profile cards */
     .profile { text-align: center; }
     .profile img {
       border-radius: 50%;
-      width: 100px;
-      height: 100px;
+      width: 100px; height: 100px;
       object-fit: cover;
       margin: 0 auto 8px;
       display: block;
       border: 2px solid #dbdbdb;
     }
     .profile h3 { font-size: 0.9rem; margin-top: 6px; }
-
-    /* ── Footer ─────────────────────────────────────────────────── */
-    .footer .icon-link {
-      font-size: 25px;
-      color: #000;
-    }
-    .footer .icon-link:hover { color: hsl(204, 86%, 53%); }
-
-    /* ── Comparison grid ────────────────────────────────────────── */
-    .compare-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .compare-grid .item {
-      border: 1px solid #bbb;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-    }
-    .compare-grid video { width: 100%; display: block; }
-    .compare-label {
-      position: absolute;
-      top: 8px; left: 8px;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
-      font-size: 12px;
-      padding: 2px 10px;
-      border-radius: 4px;
-      font-family: Arial, sans-serif;
-    }
-    @media (max-width: 640px) { .compare-grid { grid-template-columns: 1fr; } }
-
-    /* ── Quantitative results table ─────────────────────────────── */
-    .results-table th { background: #f5f5f5; }
-    .results-table .best { color: #23a76c; font-weight: 700; }
-    .results-table .ours td { font-weight: 600; }
   </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/js/bulma-carousel.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      bulmaCarousel.attach('#results-carousel', {
+        slidesToScroll: 1,
+        slidesToShow: 2,
+        loop: true,
+        autoplay: false,
+        breakpoints: [{ changePoint: 640, slidesToShow: 1, slidesToScroll: 1 }]
+      });
+    });
+  </script>
 </head>
+
 <body>
 
-<!-- ────────────────────────────────────────────────────────────────
-     NAVBAR
-──────────────────────────────────────────────────────────────────── -->
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <!-- Optional: add a logo or lab name here -->
-  </div>
-</nav>
-
-<!-- ────────────────────────────────────────────────────────────────
-     HERO — title, authors, venue, links
-──────────────────────────────────────────────────────────────────── -->
+<!-- ── HERO ─────────────────────────────────────────────────────────── -->
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
@@ -225,39 +120,31 @@
         <div class="column has-text-centered">
 
           <h1 class="title is-1 publication-title">
-            Learning Collaborative Navigation Policies for an Air-Ground Team Under Sensing Uncertainty in Unknown Environments
+            Learning Collaborative Navigation Policies for an Air-Ground Team
+            Under Sensing Uncertainty in Unknown Environments
           </h1>
 
-          <!-- ANONYMOUS SUBMISSION — uncomment after acceptance
+          <!-- ── AUTHORS — commented out for anonymous submission ──────
           <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="#">Author One</a><sup>1</sup>,&nbsp;
-            </span>
-            <span class="author-block">
-              <a href="#">Author Two</a><sup>1</sup>,&nbsp;
-            </span>
-            <span class="author-block">
-              <a href="#">Author Three</a><sup>2</sup>,&nbsp;
-            </span>
-            <span class="author-block">
-              <a href="#">Author Four</a><sup>1</sup>
-            </span>
+            <span class="author-block"><a href="#">Author One</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="#">Author Two</a><sup>1</sup>,</span>
+            <span class="author-block"><a href="#">Author Three</a><sup>2</sup>,</span>
+            <span class="author-block"><a href="#">Author Four</a><sup>1</sup></span>
           </div>
-
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University Name,&nbsp;</span>
+            <span class="author-block"><sup>1</sup>University Name,</span>
             <span class="author-block"><sup>2</sup>Another Institution</span>
           </div>
-
           <div class="column has-text-centered">
-            <div class="publication-venue">
+            <div class="is-size-4 publication-authors">
               Conference on Robot Learning (CoRL) 2025
             </div>
           </div>
+          ───────────────────────────────────────────────────────────── -->
 
+          <!-- ── LINKS — commented out for anonymous submission ────────
           <div class="column has-text-centered">
             <div class="publication-links">
-
               <span class="link-block">
                 <a href="https://arxiv.org/abs/XXXX.XXXXX"
                    class="external-link button is-normal is-rounded is-dark">
@@ -265,7 +152,6 @@
                   <span>arXiv</span>
                 </a>
               </span>
-
               <span class="link-block">
                 <a href="static/paper.pdf"
                    class="external-link button is-normal is-rounded is-dark">
@@ -273,7 +159,6 @@
                   <span>Paper</span>
                 </a>
               </span>
-
               <span class="link-block">
                 <a href="https://github.com/yourusername/yourrepo"
                    class="external-link button is-normal is-rounded is-dark">
@@ -281,18 +166,9 @@
                   <span>Code</span>
                 </a>
               </span>
-
-              <span class="link-block">
-                <a href="#videos"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-video"></i></span>
-                  <span>Videos</span>
-                </a>
-              </span>
-
             </div>
           </div>
-          -->
+          ───────────────────────────────────────────────────────────── -->
 
         </div>
       </div>
@@ -301,38 +177,25 @@
 </section>
 
 
-<!-- ────────────────────────────────────────────────────────────────
-     TEASER — main overview video or figure
-──────────────────────────────────────────────────────────────────── -->
+<!-- ── TEASER ────────────────────────────────────────────────────────── -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-
-      <!-- Option A: teaser VIDEO (comment out if using image) -->
-      <video id="teaser-video" autoplay muted loop playsinline width="100%"
-             style="border-radius:10px; border:1px solid #dbdbdb;">
-        <source src="videos/teaser.mp4" type="video/mp4" />
-      </video>
-
-      <!-- Option B: teaser IMAGE — uncomment and delete the video block above
-      <figure class="image">
-        <img src="static/teaser.png" alt="Teaser overview" style="border-radius:10px;" />
-      </figure>
-      -->
-
-      <h2 class="subtitle has-text-centered" style="margin-top:1.5rem;">
-        <strong>Overview:</strong> A one-sentence summary of your system or key result.
-        Replace this with the caption for your teaser video or figure.
+      <div class="image-center-block">
+        <!-- Replace with your teaser image or video -->
+        <img src="static/teaser.png" width="90%"
+             onerror="this.style.display='none'"
+             alt="Teaser figure" />
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Replace this with a one-sentence summary of your system or key result.
       </h2>
-
     </div>
   </div>
 </section>
 
 
-<!-- ────────────────────────────────────────────────────────────────
-     ABSTRACT + PAPER VIDEO
-──────────────────────────────────────────────────────────────────── -->
+<!-- ── ABSTRACT + VIDEOS ─────────────────────────────────────────────── -->
 <section class="section">
   <div class="container is-max-desktop">
 
@@ -345,393 +208,159 @@
             Replace this with your paper abstract. Lorem ipsum dolor sit amet, consectetur
             adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-            ex ea commodo consequat.
+            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur.
           </p>
           <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+            mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit
+            voluptatem accusantium doloremque laudantium.
           </p>
         </div>
       </div>
     </div>
 
-    <hr />
-
-    <!-- Paper / presentation video (YouTube embed or local MP4) -->
+    <!-- Videos -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
+        <h2 class="title is-3">Videos</h2>
 
-        <!-- Clickable thumbnail — opens YouTube in new tab -->
-        <a class="publication-video"
-           href="https://youtu.be/UKRjjblC8iI"
-           target="_blank" rel="noopener">
+        <!-- Video 1 -->
+        <a class="yt-thumb" href="https://youtu.be/UKRjjblC8iI" target="_blank" rel="noopener">
           <img src="https://img.youtube.com/vi/UKRjjblC8iI/hqdefault.jpg"
                onerror="this.src='https://img.youtube.com/vi/UKRjjblC8iI/default.jpg'"
-               alt="Demo video thumbnail" />
+               alt="Demo video 1" />
           <div class="play-btn">
             <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
           </div>
         </a>
-        <p class="has-text-centered" style="margin-top:0.5rem;">
-          <strong>Video 1 — Demo Title Placeholder</strong>
-        </p>
-        <p class="has-text-centered" style="margin-top:0.25rem; font-size:0.9rem; color:#555; max-width:640px; margin-left:auto; margin-right:auto;">
+        <p style="margin-top:0.5rem;"><strong>Video 1 — Demo Title Placeholder</strong></p>
+        <p style="margin-top:0.25rem; font-size:0.9rem; color:#555;">
           Brief description of what this video demonstrates. Replace with a one or two sentence
-          summary of the scenario, the robot behavior, or the key result being shown.
+          summary of the scenario, robot behavior, or key result shown.
         </p>
+
+        <!-- Video 2 -->
+        <a class="yt-thumb" href="https://youtu.be/Tx4gb7NJhqM" target="_blank" rel="noopener"
+           style="margin-top:2rem; display:block;">
+          <img src="https://img.youtube.com/vi/Tx4gb7NJhqM/hqdefault.jpg"
+               onerror="this.src='https://img.youtube.com/vi/Tx4gb7NJhqM/default.jpg'"
+               alt="Demo video 2" />
+          <div class="play-btn">
+            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </a>
+        <p style="margin-top:0.5rem;"><strong>Video 2 — Demo Title Placeholder</strong></p>
+        <p style="margin-top:0.25rem; font-size:0.9rem; color:#555;">
+          Brief description of what this video demonstrates. Replace with a one or two sentence
+          summary of the scenario, robot behavior, or key result shown.
+        </p>
+
       </div>
     </div>
 
-
   </div>
 </section>
 
 
-<!-- ────────────────────────────────────────────────────────────────
-     DEMO VIDEOS — carousel (matches hovsg results-carousel style)
-──────────────────────────────────────────────────────────────────── -->
-<section class="hero is-light is-small" id="videos">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3 has-text-centered" style="margin-bottom:1.5rem;">Demo Videos</h2>
-
-      <!--
-        VIDEO CAROUSEL
-        Add/remove <div class="item"> blocks to add more videos.
-        The carousel shows 2 at a time on desktop, 1 on mobile.
-      -->
-      <div id="results-carousel" class="carousel results-carousel">
-
-        <div class="item has-text-centered">
-          <video poster="" autoplay muted loop playsinline height="100%">
-            <source src="videos/demo_01.mp4" type="video/mp4" />
-          </video>
-          <div class="overlay-container">
-            Demo 1 — Scenario Name or Instruction
-          </div>
-        </div>
-
-        <div class="item has-text-centered">
-          <video poster="" autoplay muted loop playsinline height="100%">
-            <source src="videos/demo_02.mp4" type="video/mp4" />
-          </video>
-          <div class="overlay-container">
-            Demo 2 — Scenario Name or Instruction
-          </div>
-        </div>
-
-        <div class="item has-text-centered">
-          <video poster="" autoplay muted loop playsinline height="100%">
-            <source src="videos/demo_03.mp4" type="video/mp4" />
-          </video>
-          <div class="overlay-container">
-            Demo 3 — Scenario Name or Instruction
-          </div>
-        </div>
-
-        <div class="item has-text-centered">
-          <video poster="" autoplay muted loop playsinline height="100%">
-            <source src="videos/demo_04.mp4" type="video/mp4" />
-          </video>
-          <div class="overlay-container">
-            Demo 4 — Scenario Name or Instruction
-          </div>
-        </div>
-
-        <div class="item has-text-centered">
-          <video poster="" autoplay muted loop playsinline height="100%">
-            <source src="videos/demo_05.mp4" type="video/mp4" />
-          </video>
-          <div class="overlay-container">
-            Demo 5 — Scenario Name or Instruction
-          </div>
-        </div>
-
-        <div class="item has-text-centered">
-          <video poster="" autoplay muted loop playsinline height="100%">
-            <source src="videos/demo_06.mp4" type="video/mp4" />
-          </video>
-          <div class="overlay-container">
-            Demo 6 — Scenario Name or Instruction
-          </div>
-        </div>
-
-        <div class="item has-text-centered">
-          <video poster="" autoplay muted loop playsinline height="100%">
-            <source src="videos/demo_07.mp4" type="video/mp4" />
-          </video>
-          <div class="overlay-container">
-            Demo 7 — Scenario Name or Instruction
-          </div>
-        </div>
-
-        <div class="item has-text-centered">
-          <video poster="" autoplay muted loop playsinline height="100%">
-            <source src="videos/demo_08.mp4" type="video/mp4" />
-          </video>
-          <div class="overlay-container">
-            Demo 8 — Scenario Name or Instruction
-          </div>
-        </div>
-
-      </div><!-- /#results-carousel -->
-    </div>
-  </div>
-</section>
-
-
-<!-- ────────────────────────────────────────────────────────────────
-     METHOD / APPROACH
-──────────────────────────────────────────────────────────────────── -->
+<!-- ── APPROACH ──────────────────────────────────────────────────────── -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3">Approach</h2>
-
-    <!-- Method overview figure -->
     <div class="columns is-centered">
-      <div class="column">
-        <figure class="image">
-          <img src="static/method_overview.png" alt="Method overview" style="border-radius:8px;" />
-        </figure>
-        <p class="has-text-centered" style="margin-top:0.75rem; color:#555; font-size:0.9rem;">
-          <strong>Figure 1.</strong> Overview of the proposed method. Replace
-          <code>static/method_overview.png</code> with your figure.
-        </p>
-      </div>
-    </div>
+      <div class="column is-full-width">
+        <h2 class="title is-3">Approach</h2>
+        <div class="content has-text-justified has-text-centered">
 
-    <!-- Sub-section with text + figure side-by-side -->
-    <div class="columns is-centered" style="margin-top:2rem;">
-      <div class="column is-half">
-        <h3 class="title is-4">Component A</h3>
-        <div class="content">
-          <p>
-            Describe the first component of your method here. Explain the key idea,
-            what problem it solves, and how it connects to the rest of the pipeline.
-          </p>
-        </div>
-      </div>
-      <div class="column is-half">
-        <figure class="image">
-          <img src="static/component_a.png" alt="Component A" style="border-radius:8px; border:1px solid #dbdbdb;" />
-        </figure>
-      </div>
-    </div>
+          <!-- Replace with your method overview figure -->
+          <img src="static/method_overview.png"
+               onerror="this.style.display='none'"
+               alt="Method overview" />
 
-    <div class="columns is-centered" style="margin-top:1.5rem;">
-      <div class="column is-half">
-        <figure class="image">
-          <img src="static/component_b.png" alt="Component B" style="border-radius:8px; border:1px solid #dbdbdb;" />
-        </figure>
-      </div>
-      <div class="column is-half">
-        <h3 class="title is-4">Component B</h3>
-        <div class="content">
+          <h3 class="title is-4">System Overview</h3>
           <p>
-            Describe the second component here. This layout alternates text and figure
-            to keep the page visually engaging.
+            Replace this with a description of your approach. Explain the key idea,
+            the main components of your system, and how they fit together.
           </p>
+
+          <h4>Component A</h4>
+          <p>
+            Describe the first component of your method here. Explain what it does,
+            why it is needed, and how it contributes to the overall system.
+          </p>
+
+          <h4>Component B</h4>
+          <p>
+            Describe the second component of your method here.
+          </p>
+
+          <!-- Replace with additional figures as needed -->
+          <img src="static/results.png"
+               onerror="this.style.display='none'"
+               alt="Results figure" />
+
+          <h3 class="title is-4">Results</h3>
+          <p>
+            Describe your experimental results here. Include key quantitative findings
+            and what they demonstrate about your approach.
+          </p>
+
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 
-<!-- ────────────────────────────────────────────────────────────────
-     COMPARISONS — side-by-side video pairs
-──────────────────────────────────────────────────────────────────── -->
-<section class="section" style="background:#fafafa;">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">Comparisons</h2>
-    <p class="subtitle" style="margin-bottom:2rem;">
-      Side-by-side comparison against baselines. Left: baseline. Right: ours.
-    </p>
-
-    <!-- Row 1 -->
-    <div class="compare-grid">
-      <div class="item">
-        <video autoplay muted loop playsinline>
-          <source src="videos/compare_baseline_01.mp4" type="video/mp4" />
-        </video>
-        <span class="compare-label">Baseline — Scene A</span>
-      </div>
-      <div class="item">
-        <video autoplay muted loop playsinline>
-          <source src="videos/compare_ours_01.mp4" type="video/mp4" />
-        </video>
-        <span class="compare-label">Ours — Scene A</span>
-      </div>
-    </div>
-
-    <!-- Row 2 -->
-    <div class="compare-grid">
-      <div class="item">
-        <video autoplay muted loop playsinline>
-          <source src="videos/compare_baseline_02.mp4" type="video/mp4" />
-        </video>
-        <span class="compare-label">Baseline — Scene B</span>
-      </div>
-      <div class="item">
-        <video autoplay muted loop playsinline>
-          <source src="videos/compare_ours_02.mp4" type="video/mp4" />
-        </video>
-        <span class="compare-label">Ours — Scene B</span>
-      </div>
-    </div>
-
-    <!-- Row 3 -->
-    <div class="compare-grid">
-      <div class="item">
-        <video autoplay muted loop playsinline>
-          <source src="videos/compare_baseline_03.mp4" type="video/mp4" />
-        </video>
-        <span class="compare-label">Baseline — Scene C</span>
-      </div>
-      <div class="item">
-        <video autoplay muted loop playsinline>
-          <source src="videos/compare_ours_03.mp4" type="video/mp4" />
-        </video>
-        <span class="compare-label">Ours — Scene C</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ────────────────────────────────────────────────────────────────
-     QUANTITATIVE RESULTS
-──────────────────────────────────────────────────────────────────── -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">Quantitative Results</h2>
-
-    <div class="content">
-      <p>
-        Brief description of the evaluation setup and what the metrics measure.
-      </p>
-    </div>
-
-    <div class="table-container">
-      <table class="table is-bordered is-striped is-hoverable is-fullwidth results-table">
-        <thead>
-          <tr>
-            <th>Method</th>
-            <th>Metric 1 ↑</th>
-            <th>Metric 2 ↑</th>
-            <th>Metric 3 ↓</th>
-            <th>Metric 4 ↑</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Baseline A</td>
-            <td>42.1</td><td>38.7</td><td>0.312</td><td>71.4</td>
-          </tr>
-          <tr>
-            <td>Baseline B</td>
-            <td>45.6</td><td>41.2</td><td>0.284</td><td>74.8</td>
-          </tr>
-          <tr>
-            <td>Baseline C</td>
-            <td>48.3</td><td>44.1</td><td>0.261</td><td>77.2</td>
-          </tr>
-          <tr class="ours">
-            <td><strong>Ours</strong></td>
-            <td class="best">54.7</td>
-            <td class="best">51.3</td>
-            <td class="best">0.198</td>
-            <td class="best">83.6</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ────────────────────────────────────────────────────────────────
-     PEOPLE / TEAM
-     (remove for anonymous submission)
-──────────────────────────────────────────────────────────────────── -->
-<section class="section" style="background:#fafafa;">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">People</h2>
-    <div class="columns is-multiline is-centered">
-
-      <div class="column is-one-fifth has-text-centered profile">
-        <a href="#">
-          <img src="static/people/author1.jpg" alt="Author One" />
-        </a>
-        <h3><a href="#">Author One</a></h3>
-      </div>
-
-      <div class="column is-one-fifth has-text-centered profile">
-        <a href="#">
-          <img src="static/people/author2.jpg" alt="Author Two" />
-        </a>
-        <h3><a href="#">Author Two</a></h3>
-      </div>
-
-      <div class="column is-one-fifth has-text-centered profile">
-        <a href="#">
-          <img src="static/people/author3.jpg" alt="Author Three" />
-        </a>
-        <h3><a href="#">Author Three</a></h3>
-      </div>
-
-      <div class="column is-one-fifth has-text-centered profile">
-        <a href="#">
-          <img src="static/people/author4.jpg" alt="Author Four" />
-        </a>
-        <h3><a href="#">Author Four</a></h3>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-
-<!-- ────────────────────────────────────────────────────────────────
-     BIBTEX — commented out for anonymous submission; uncomment after acceptance
-──────────────────────────────────────────────────────────────────── -->
-<!--
+<!-- ── BIBTEX — commented out for anonymous submission ──────────────────
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code id="bibtex-code">@inproceedings{yourkey2025,
+    <pre><code>@inproceedings{yourkey2025,
   title     = {Learning Collaborative Navigation Policies for an Air-Ground Team Under Sensing Uncertainty in Unknown Environments},
   author    = {Last, First and Last, First and Last, First and Last, First},
   booktitle = {Conference on Robot Learning (CoRL)},
   year      = {2025},
 }</code></pre>
-    <button class="button is-small is-light" onclick="copyBibtex()" id="copy-btn"
-            style="margin-top:8px;">
-      <span class="icon is-small"><i class="fas fa-copy"></i></span>
-      <span>Copy</span>
-    </button>
   </div>
 </section>
--->
+─────────────────────────────────────────────────────────────────────── -->
 
 
-<!-- ────────────────────────────────────────────────────────────────
-     FOOTER
-──────────────────────────────────────────────────────────────────── -->
+<!-- ── PEOPLE — commented out for anonymous submission ──────────────────
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">People</h2>
+    <div class="columns container">
+      <div class="column has-text-centered profile">
+        <a href="#"><img src="static/people/author1.jpg" alt="Author One" /></a>
+        <h3><a href="#">Author One</a></h3>
+      </div>
+      <div class="column has-text-centered profile">
+        <a href="#"><img src="static/people/author2.jpg" alt="Author Two" /></a>
+        <h3><a href="#">Author Two</a></h3>
+      </div>
+      <div class="column has-text-centered profile">
+        <a href="#"><img src="static/people/author3.jpg" alt="Author Three" /></a>
+        <h3><a href="#">Author Three</a></h3>
+      </div>
+      <div class="column has-text-centered profile">
+        <a href="#"><img src="static/people/author4.jpg" alt="Author Four" /></a>
+        <h3><a href="#">Author Four</a></h3>
+      </div>
+    </div>
+  </div>
+</section>
+─────────────────────────────────────────────────────────────────────── -->
+
+
+<!-- ── FOOTER ────────────────────────────────────────────────────────── -->
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
-      <a class="icon-link" href="static/paper.pdf" title="PDF">
+      <a class="icon-link" href="#">
         <i class="fas fa-file-pdf"></i>
       </a>
-      &nbsp;
-      <a class="icon-link" href="https://github.com/yourusername/yourrepo" title="GitHub">
+      <a class="icon-link" href="#">
         <i class="fab fa-github"></i>
       </a>
     </div>
@@ -739,50 +368,15 @@
       <div class="column is-8">
         <div class="content has-text-centered">
           <p style="font-size:0.85rem; color:#888;">
-            Website template borrowed from
-            <a href="https://nerfies.github.io" target="_blank">Nerfies</a>
-            and <a href="https://hovsg.github.io" target="_blank">HOV-SG</a>
-            under <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.
+            Website borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>
+            and <a href="https://hovsg.github.io">HOV-SG</a> under
+            <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
           </p>
         </div>
       </div>
     </div>
   </div>
 </footer>
-
-
-<!-- ────────────────────────────────────────────────────────────────
-     SCRIPTS
-──────────────────────────────────────────────────────────────────── -->
-<script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/js/bulma-carousel.min.js"></script>
-<script>
-  // ── Initialise carousel ────────────────────────────────────────
-  bulmaCarousel.attach('#results-carousel', {
-    slidesToScroll: 1,
-    slidesToShow:   2,   // show 2 videos at a time; change to 1 for single-column
-    loop:           true,
-    autoplay:       false,
-    breakpoints: [
-      { changePoint: 640, slidesToShow: 1, slidesToScroll: 1 }
-    ]
-  });
-
-
-
-  // ── Copy BibTeX (commented out for anonymous submission) ────────
-  /*
-  function copyBibtex() {
-    const text = document.getElementById('bibtex-code').innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.getElementById('copy-btn');
-      btn.querySelector('span:last-child').textContent = 'Copied!';
-      setTimeout(() => {
-        btn.querySelector('span:last-child').textContent = 'Copy';
-      }, 2000);
-    });
-  }
-  */
-</script>
 
 </body>
 </html>
