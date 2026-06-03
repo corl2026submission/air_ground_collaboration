@@ -202,7 +202,7 @@
         </div>
         <p style="margin-top:0.5rem;"><strong>Air-Ground Collaborative Navigation to avoid untraversable region (blue tarp) considering perception uncertainty</strong></p>
         <p style="margin-top:0.25rem; font-size:0.9rem; color:#555;">
-          The aerial agent maps the environment and locates the blue tarp faster than the ground agent, though GPS drift causes inaccuracies in the tarp's perceived shape and location. Our uncertainty-aware policy routes the ground agent along a short straight-line path from (2, 6) to (10, 6), correctly discounting the drone's imprecise detection rather than taking a longer unnecessary detour.
+          The aerial agent maps the environment and locates the blue tarp faster than the ground agent, though GPS drift causes inaccuracies in the tarp's perceived shape and location. Our uncertainty-aware policy routes the ground agent along a short path from (2, 2) to (10, 8), utilizing the tarp detected by the drone ahead of time but also correctly discounting the drone's imprecise detection to ensure that an unnecessary long detour is avoided.
         </p>
 
         <!-- Video 2 -->
